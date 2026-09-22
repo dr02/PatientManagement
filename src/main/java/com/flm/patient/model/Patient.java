@@ -2,27 +2,31 @@ package com.flm.patient.model;
 
 import java.time.LocalDate;
 
+import com.flm.patient.util.PatientEntityListener;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "patients")
+@Table(name = "patient_details")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(PatientEntityListener.class)
 public class Patient {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "patient_id")
 	private Long id;
 	
 	@Column(nullable = false)
