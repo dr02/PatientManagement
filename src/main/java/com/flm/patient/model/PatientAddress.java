@@ -6,39 +6,37 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name="patient_adress")
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "patient_address")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatientAddress {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long patientAddressId;
+	private Long id;
 	
 	private String landmark;
 	
-	private String city;
-	
 	private String state;
+	
+	private String city;
 	
 	private String country;
 	
 	private String pincode;
 
-	public PatientAddress(String landmark, String city, String state, String country, String pincode) {
+	public PatientAddress(String landmark, String state, String city, String country, String pincode) {
 		super();
 		this.landmark = landmark;
-		this.city = city;
 		this.state = state;
+		this.city = city;
 		this.country = country;
 		this.pincode = pincode;
 	}
-	
-	
-
 }

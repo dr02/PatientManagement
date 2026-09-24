@@ -2,46 +2,52 @@ package com.flm.patient.model;
 
 import java.time.LocalDate;
 
+import com.flm.patient.util.PatientEntityListener;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Table(name="patient_details")
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "patient_details")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(PatientEntityListener.class)
 public class Patient {
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long patientId ; 
+	@Column(name = "patient_id")
+	private Long id;
 	
-	private String name ;
+	@Column(nullable = false)
+	private String name;
 	
-	private String gender ;
+	private String gender;
 	
 	@Column(unique = true, nullable = false)
-	private String email ;
+	private String email;
 	
-	private long phoneNumber ; 
+	@Column(name = "phone_number")
+	private String phoneNumber;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "patient_address_id")
+	@JoinColumn(name = "patient_address_id")
 	private PatientAddress patientAddress;
 	
+	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 
-	public Patient(String name, String gender, String email, long phoneNumber, PatientAddress patientAddress,
+	public Patient(String name, String gender, String email, String phoneNumber, PatientAddress patientAddress,
 			LocalDate dateOfBirth) {
 		super();
 		this.name = name;
@@ -51,6 +57,5 @@ public class Patient {
 		this.patientAddress = patientAddress;
 		this.dateOfBirth = dateOfBirth;
 	}
-	
 	
 }
